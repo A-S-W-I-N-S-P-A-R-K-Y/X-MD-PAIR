@@ -2,3 +2,5 @@
 
 # Aztec-Qr
 
+*Run the qr code via replit or heroku else railway run it on sny platform you desire to get the session id ex session json*
+
