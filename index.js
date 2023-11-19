@@ -59,12 +59,6 @@ app.use("/", (req, res) => {
 
           try {
             let data = fs.readFileSync(__dirname + name + 'creds.json');
-            await delay(800);
-            let b64data = Buffer.from(data).toString('base64');
-            await session.sendMessage(user, { text: 'Vorterx;;;' + b64data });
-            const output = await axios.post('http://paste.c-net.org/', b64data, {
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            });
             c2 = output.data.split('/')[3];
             await delay(500);
             let session_id1 = await session.sendMessage(user, { text: 'Vorterx;;;' + c2 });
