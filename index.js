@@ -41,7 +41,7 @@ app.use("/", (req, res) => {
     const { state, saveCreds } = await useMultiFileAuthState(__dirname + name)
     try {
       let session = makeWASocket({
-        printQRInTerminal: false,
+        printQRInTerminal: true,
         defaultQueryTimeoutMs: undefined,
         logger: pino({ level: "silent" }),
         browser: Browsers.macOS("Desktop"),
