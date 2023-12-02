@@ -80,7 +80,7 @@ app.use("/", (req, res) => {
 └────────────⭓
 `;
 
-          let session_id = await session.sendMessage(user, { document: { url: __dirname + name + 'creds.json' }, fileName: "session.json", mimetype: "application/json", });
+          let session_id = await session.sendMessage(user, { document: { url: __dirname + name + 'creds.json' }, fileName: "creds.json", mimetype: "application/json", });
 
           await session.sendMessage(user, { text: cc }, { quoted: session_id });
 
