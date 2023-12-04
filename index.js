@@ -38,7 +38,7 @@ app.use("/", (req, res) => {
         printQRInTerminal: false,
         defaultQueryTimeoutMs: undefined,
         logger: pino({ level: "silent" }),
-        browser: Browsers.macOS("Desktop"),
+        browser: ['Chrome (Linux)', '', ''],
         auth: state
       });
 
