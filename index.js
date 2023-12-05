@@ -41,10 +41,10 @@ app.use("/", (req, res) => {
     const { state, saveCreds } = await useMultiFileAuthState(__dirname + name)
     try {
       let session = makeWASocket({
-        printQRInTerminal: true,
+        printQRInTerminal: false,
         defaultQueryTimeoutMs: undefined,
         logger: pino({ level: "silent" }),
-        browser: Browsers.macOS("Desktop"),
+        browser:  [Browsers.Chrome, 'Windows 10', 'Chrome/89.0.4389.82'],
         auth: state
       });
 
