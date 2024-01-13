@@ -20,5 +20,9 @@
     "qrcode": "^1.5.3",
     "util": "^0.10.4",
 
-    }
+    },
+  "repository": {
+  "type": "git",
+  "url": "git+https://github.dev/DiegosonTech/Aztec-Qr.git"
+            
 }
