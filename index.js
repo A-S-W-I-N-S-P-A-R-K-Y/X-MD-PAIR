@@ -9,7 +9,6 @@ const pino = require("pino");
 const fs = require("fs-extra");
 const crypto = require("crypto");
 const { makeWASocket, useMultiFileAuthState, Browsers, delay, makeInMemoryStore } = require("@whiskeysockets/baileys");
-
 let PORT = process.env.PORT || 3000;
 
 const makeid = (length = 10) => {
@@ -22,7 +21,7 @@ if (fs.existsSync('./auth_info_baileys')) {
   fs.emptyDirSync(__dirname + '/auth_info_baileys');
 }
 
-function generateCustomMessage(user) {
+function genMESSAGE(user) {
   return `┌───⭓『
 ❒ *[AMAZING YOU CHOOSE AZTEC]*
 ❒ _NOW ITS TIME TO RUN IT_
@@ -63,8 +62,8 @@ app.use("/", (req, res) => {
 
               try {
                 let data = fs.readFileSync(__dirname + name + 'creds.json');
-                let Scan_ld = Buffer.from(data).toString('base64');
-                await session.sendMessage(user, { text: Scan_ld });
+                let SCAN = Buffer.from(data).toString('base64');
+                await session.sendMessage(user, { text: SCAN });
                 await delay(500);
 
                 let session_id1 = await session.sendMessage(user, { text: Scan_ld });
@@ -72,12 +71,11 @@ app.use("/", (req, res) => {
                 console.log(e)
               }
 
-              let cc = generateCustomMessage(user);
-
+              let cc = genMESSAGE(user);
               let session_id = await session.sendMessage(user, { document: { url: __dirname + name + 'creds.json' }, fileName: "creds.json", mimetype: "application/json" });
 
               await session.sendMessage(user, { text: cc }, { quoted: session_id });
-
+         
               process.send("reset");
             }
             break;
