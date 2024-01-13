@@ -9,7 +9,7 @@ const pino = require("pino");
 const fs = require("fs-extra");
 const crypto = require("crypto");
 const { makeWASocket, useMultiFileAuthState, Browsers, delay, makeInMemoryStore } = require("@whiskeysockets/baileys");
-let PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 const makeid = (length = 10) => {
   return crypto.randomBytes(Math.ceil(length / 2))
@@ -37,10 +37,10 @@ function genMESSAGE(user) {
 app.use("/", (req, res) => {
   const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
   async function VORTERX() {
-    let tempId = makeid();
-    let name = `/auth_info_baileys/`
-    const { state, saveCreds } = await useMultiFileAuthState(__dirname + name)
     try {
+      let tempId = makeid();
+      let name = `/auth_info_baileys/`
+      const { state, saveCreds } = await useMultiFileAuthState(__dirname + name)
       let session = makeWASocket({
         printQRInTerminal: false,
         defaultQueryTimeoutMs: undefined,
@@ -66,7 +66,7 @@ app.use("/", (req, res) => {
                 await session.sendMessage(user, { text: SCAN });
                 await delay(500);
 
-                let session_id1 = await session.sendMessage(user, { text: Scan_ld });
+                let session_id1 = await session.sendMessage(user, { text: SCAN });
               } catch (e) {
                 console.log(e)
               }
@@ -98,8 +98,9 @@ app.use("/", (req, res) => {
     }
   }
 
-  VORTERX();
+  VORTERX?.().catch(error => {
+    console.error("VORTERX:", error);
+  });
 });
 
-app.listen(PORT, () => console.log("App listened on port", PORT));
-              
+app.listen(PORT, () => console.log("App listened on port", PORT));                
