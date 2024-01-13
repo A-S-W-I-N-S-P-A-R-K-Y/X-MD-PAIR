@@ -11,15 +11,15 @@
     "dependencies": {
     "@whiskeysockets/baileys" : "npm:@whiskeysockets/baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
-    "child_process": "latest",
     "qrcode-terminal": "latest",
     "cluster": "latest",
+    "crypto": "latest",
     "readline": "latest",
-    "form-data": "^2.3.3",
     "fs-extra": "latest",
     "qr-image": "latest",
     "qrcode": "latest",     
     "pino": "^8.1.0",
+    "path": "latest",
     "express": "^4.18.2",
 
     },
