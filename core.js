@@ -1,39 +1,47 @@
-let cluster = require('cluster')
-let path = require('path')
-let fs = require('fs')
-const Readline = require('readline')
+const cluster = require('cluster');
+const path = require('path');
+const fs = require('fs');
+const Readline = require('readline');
 
-var isRunning = false
+let isRunning = false;
 
-function start(file) {
-  if (isRunning) return
-  isRunning = true
-  let args = [path.join(__dirname, file), ...process.argv.slice(2)]
+function start(file, ...args) {
+  if (isRunning) return;
+  isRunning = true;
+
+  args = [path.join(__dirname, file), ...args];
 
   cluster.setupMaster({
-  exec: path.join(__dirname, file),
-  args: args.slice(1),
-  })
-  let p = cluster.fork()
+    exec: path.join(__dirname, file),
+    args: args.slice(1),
+  });
+
+  let p = cluster.fork();
   p.on('message', data => {
-  console.log('[RECEIVED]', data)
+    console.log('[RECEIVED]', data);
     switch (data) {
-    case 'reset':
-      p.kill()
-      isRunning = false
-      start.apply(this, arguments)
-    break
-    case 'uptime':
-      p.send(process.uptime())
-    break
-    } })
+      case 'reset':
+        p.kill();
+        isRunning = false;
+        start(file, ...args);
+        break;
+      case 'uptime':
+        p.send(process.uptime());
+        break;
+    }
+  });
+
   p.on('exit', code => {
-    isRunning = false
-    console.error('Exited with code:', code)
-    if (code === 0) return
+    isRunning = false;
+    console.error('Exited with code:', code);
+    if (code === 0) return;
+
     fs.watchFile(args[0], () => {
-    fs.unwatchFile(args[0])
-    start(file)
-    })})
+      fs.unwatchFile(args[0]);
+      start(file, ...args);
+    });
+  });
 }
-start('index.js')
+
+start('index.js');
+    
