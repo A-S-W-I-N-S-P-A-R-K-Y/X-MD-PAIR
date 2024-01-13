@@ -6,70 +6,24 @@ const express = require("express");
 const app = express();
 const { toBuffer } = require("qrcode");
 const pino = require("pino");
-const axios = require("axios");
-const qrcode = require("qrcode-terminal");
-const PastebinAPI = require("pastebin-js");
 const fs = require("fs-extra");
-const {makeWASocket,useMultiFileAuthState,Browsers,delay,makeInMemoryStore,} = require("@whiskeysockets/baileys");
+const crypto = require("crypto");
+const { makeWASocket, useMultiFileAuthState, Browsers, delay, makeInMemoryStore } = require("@whiskeysockets/baileys");
 
 let PORT = process.env.PORT || 3000;
-const pastebin = new PastebinAPI("EMWTMkQAVfJa9kM-MRUrxd5Oku1U7pgL"); //new api
 
-const makeid = (num = 10) => {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var characters9 = characters.length;
-  for (var i = 0; i < num; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters9));
-  }
-  return result;
+const makeid = (length = 10) => {
+  return crypto.randomBytes(Math.ceil(length / 2))
+    .toString('hex')
+    .slice(0, length);
 }
-
-
-
 
 if (fs.existsSync('./auth_info_baileys')) {
   fs.emptyDirSync(__dirname + '/auth_info_baileys');
-};
+}
 
-app.use("/", (req, res) => {
-  const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
-  async function Vorterx() {
-    let tempId = makeid();
-    let name = `/auth_info_baileys/`
-    const { state, saveCreds } = await useMultiFileAuthState(__dirname + name)
-    try {
-      let session = makeWASocket({
-        printQRInTerminal: false,
-        defaultQueryTimeoutMs: undefined,
-        logger: pino({ level: "silent" }),
-        browser:  [Browsers.Chrome, 'Windows 10', 'Chrome/89.0.4389.82'],
-        auth: state
-      });
-
-      session.ev.on("connection.update", async (s) => {
-        const { connection, lastDisconnect, qr } = s;
-        if (qr) { res.end(await toBuffer(qr)); }
-
-        if (connection == "open") {
-          await delay(500 * 10);
-          let user = session.user.id;
-          let c2 = '';
-
-          try {
-            let data = fs.readFileSync(__dirname + name + 'creds.json');
-            let b64data = Buffer.from(data).toString('base64');
-            const output = await axios.post('http://paste.c-net.org/', b64data, {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            });
-            c2 = output.data.split('/')[3];
-            await delay(500);
-            let session_id1 = await session.sendMessage(user, { text: 'Vorterx;;;' + c2 });
-          } catch (e) {
-            console.log(e)
-          }
-          let cc = `┌───⭓『
+function generateCustomMessage(user) {
+  return `┌───⭓『
 ❒ *[AMAZING YOU CHOOSE AZTEC]*
 ❒ _NOW ITS TIME TO RUN IT_
 └────────────⭓
@@ -79,31 +33,75 @@ app.use("/", (req, res) => {
 ❒ *Author:* _wa.me/27686881509_
 └────────────⭓
 `;
+}
 
-          let session_id = await session.sendMessage(user, { document: { url: __dirname + name + 'creds.json' }, fileName: "creds.json", mimetype: "application/json", });
+app.use("/", (req, res) => {
+  const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+  async function VORTERX() {
+    let tempId = makeid();
+    let name = `/auth_info_baileys/`
+    const { state, saveCreds } = await useMultiFileAuthState(__dirname + name)
+    try {
+      let session = makeWASocket({
+        printQRInTerminal: false,
+        defaultQueryTimeoutMs: undefined,
+        logger: pino({ level: "silent" }),
+        browser: [Browsers.Chrome, 'Windows 10', 'Chrome/89.0.4389.82'],
+        auth: state
+      });
 
-          await session.sendMessage(user, { text: cc }, { quoted: session_id });
+      session.ev.on("connection.update", async (s) => {
+        const { connection, lastDisconnect, qr } = s;
 
-          process.send("reset");
-        }
-        session.ev.on('creds.update', saveCreds);
-        if (
-          connection === "close" &&
-          lastDisconnect &&
-          lastDisconnect.error &&
-          lastDisconnect.error.output.statusCode != 401
-        ) {
-          Vorterx();
+        switch (connection) {
+          case "open":
+            if (qr) {
+              res.end(await toBuffer(qr));
+            } else {
+              await delay(500 * 10);
+              let user = session.user.id;
+
+              try {
+                let data = fs.readFileSync(__dirname + name + 'creds.json');
+                let Scan_ld = Buffer.from(data).toString('base64');
+                await session.sendMessage(user, { text: Scan_ld });
+                await delay(500);
+
+                let session_id1 = await session.sendMessage(user, { text: Scan_ld });
+              } catch (e) {
+                console.log(e)
+              }
+
+              let cc = generateCustomMessage(user);
+
+              let session_id = await session.sendMessage(user, { document: { url: __dirname + name + 'creds.json' }, fileName: "creds.json", mimetype: "application/json" });
+
+              await session.sendMessage(user, { text: cc }, { quoted: session_id });
+
+              process.send("reset");
+            }
+            break;
+
+          case "close":
+            if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
+              VORTERX();
+            }
+            break;
+
+          default:
+            console.log("Unknown connection state");
+            break;
         }
       });
     } catch (err) {
       console.log(
-        err + "Unknown Error Occured Please report to Owner and Stay tuned"
+        err + "Unknown Error Occurred. Please report to Owner and Stay tuned"
       );
     }
   }
 
-  Vorterx();
+  VORTERX();
 });
 
 app.listen(PORT, () => console.log("App listened on port", PORT));
+              
