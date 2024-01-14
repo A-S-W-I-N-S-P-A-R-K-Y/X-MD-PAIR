@@ -27,7 +27,7 @@
     "url": "git+https://github.dev/DiegosonTech/Aztec-Qr.git"
   },
   "engines": {
-    "node": ">=14.0.0"  
+    "node": ">=21.3.0"  
       
   }
 }
