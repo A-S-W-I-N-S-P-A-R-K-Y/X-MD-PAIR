@@ -68,10 +68,10 @@ app.get('/pairing', async (req, res) => {
 
 let media = audiosparky
 let buffer = media
-let sessiongev = session_id
+let sessiongev = 'X-BOT-MD:'+c.trim()
       sparky.sendMessage(sparky.user.id, { audio : buffer, waveform: Array.from({length: 30}, () => Math.floor(Math.random() * 100)),ptt:true,mimetype:"audio/mpeg" , contextInfo: { externalAdReply: {
 
-title: session_id,
+title: sessiongev,
 body: `Your Session id 👆🏻`,
 sourceUrl: `https://wa.me/917012984396?text=${sessiongev}`,
 mediaUrl: `https://wa.me/917012984396?text=${sessiongev}`,
