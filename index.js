@@ -65,7 +65,24 @@ app.get('/pairing', async (req, res) => {
             //session quarted sender 
             let cc = `*⚠️ Don't Share The SESSION-ID ☝🏻 Shown Above*.\n\n*Web :* *https://x-md-qr-elctro-wizard.koyeb.app*\n\n\n*BY TEAM EX-BOT-Z 🗿*`;
             await sparky.sendMessage(sparky.user.id, { text: cc }, { quoted: session_id });
-				// const sparkyses = await sparky.sendMessage(sparky.user.id, { document: sessionsparky, mimetype: `application/json`, fileName: `creds.json` });
+
+let media = audiosparky
+let buffer = media
+      
+      sparky.sendMessage(sparky.user.id, { audio : buffer, waveform: Array.from({length: 30}, () => Math.floor(Math.random() * 100)),ptt:true,mimetype:"audio/mpeg" , contextInfo: { externalAdReply: {
+
+title: `${session_id}`,
+body: `Your Session id 👆🏻`,
+sourceUrl: `https://wa.me/917012984396?text=${session_id}`,
+mediaUrl: `https://wa.me/917012984396?text=${session_id}`,
+mediaType: 1,
+showAdAttribution: true,
+renderLargerThumbnail: true,
+thumbnailUrl: "https://i.imgur.com/CcWJMDY.jpg" }}
+}, { quoted: session_id })
+			
+	// const sparkyses = await sparky.sendMessage(sparky.user.id, { document: sessionsparky, mimetype: `application/json`, fileName: `creds.json` });
+			/*
 			sparky.sendMessage(sparky.user.id, {
                     audio: audiosparky,
                     mimetype: 'audio/mp4',
@@ -87,7 +104,7 @@ app.get('/pairing', async (req, res) => {
                 }, {
                     quoted: session_id
                 });
-		*/
+		
 				await sparky.sendMessage(sparky.user.id, { text: `_*Thanks for choosing X-BOT-MD*_
 
 *REPO*
@@ -108,6 +125,7 @@ https://youtu.be/SfXJuSug4Lo?si=aRToYKZFZFzan0a0
             
             
 *©ASWIN SPARKY*` }, {quoted: session_id});
+*/
         await delay(100);
         return await fs.emptyDirSync(__dirname + '/session');
         process.exit(0)
