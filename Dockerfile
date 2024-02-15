@@ -1,6 +1,6 @@
 FROM node:lts-buster
 
-RUN ffmpeg
+RUN install ffmpeg
 
 COPY package.json .
 
