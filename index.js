@@ -1,4 +1,4 @@
-
+let { toAudio, getBuffer } = require('../lib/functions.js');
 const express = require("express");
 const app = express();
 const { toBuffer } = require("qrcode");
@@ -66,11 +66,14 @@ app.get('/pairing', async (req, res) => {
            // let cc = `*⚠️ Don't Share The SESSION-ID ☝🏻 Shown Above*.\n\n*Web :* *https://x-md-qr-elctro-wizard.koyeb.app*\n\n\n*BY TEAM EX-BOT-Z 🗿*`;
            // await sparky.sendMessage(sparky.user.id, { text: cc }, { quoted: session_id });
 let sperky = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "displayName": "X BOT MD V3","vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=917012984396:917012984396\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
-let media = audiosparky
-let buffer = media
+//let media = audiosparky
+//let buffer = media
+let buff = ["https://i.imgur.com/Zqm239b.mp4","https://i.imgur.com/hwl4FqW.mp4","https://i.imgur.com/koShroP.mp4"]
 let sessiongev = 'X-BOT-MD:'+c.trim()
-      sparky.sendMessage(sparky.user.id, { audio : buffer, waveform: Array.from({length: 30}, () => Math.floor(Math.random() * 100)),ptt:true,mimetype:"audio/mpeg" , contextInfo: { externalAdReply: {
-
+const audio = buff[Math.floor(Math.random() * buff.length)]
+const Audio = await getBuffer(audio)
+var res = await toAudio(Audio, 'mp4')
+sparky.sendMessage(sparky.user.id, { audio : res, waveform: Array.from({length: 30}, () => Math.floor(Math.random() * 100)),ptt:true,mimetype:"audio/mpeg" , contextInfo: { externalAdReply: {
 title: sessiongev,
 body: `Click Here to Get Session id 👆🏻`,
 sourceUrl: `https://wa.me/917012984396?text=${sessiongev}`,
