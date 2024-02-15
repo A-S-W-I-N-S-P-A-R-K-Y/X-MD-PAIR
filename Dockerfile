@@ -1,5 +1,7 @@
 FROM node:lts-buster
 
+RUN ffmpeg
+
 COPY package.json .
 
 RUN npm install
