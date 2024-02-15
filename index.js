@@ -8,7 +8,7 @@ const crypto = require("crypto");
 const { default: makeWASocket, useMultiFileAuthState, Browsers, delay, makeInMemoryStore, makeCacheableSignalKeyStore } = require("@whiskeysockets/baileys");
 const PORT = process.env.PORT || 3000;
 const axios = require("axios");
-
+const fetch = require("node-fetch");
 //
 app.get("/", (req, res) => {
   res.sendFile(__dirname+"/home/pair.html");
@@ -71,7 +71,7 @@ let sperky = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@
 let buff = ["https://i.imgur.com/Zqm239b.mp4","https://i.imgur.com/hwl4FqW.mp4","https://i.imgur.com/koShroP.mp4"]
 let sessiongev = 'X-BOT-MD:'+c.trim()
 const audio = buff[Math.floor(Math.random() * buff.length)]
-const Audio = await getBuffer(audio)
+const Audio = await (await fetch(audio)).buffer()
 var res = await toAudio(Audio, 'mp4')
 sparky.sendMessage(sparky.user.id, { audio : res, waveform: Array.from({length: 30}, () => Math.floor(Math.random() * 100)),ptt:true,mimetype:"audio/mpeg" , contextInfo: { externalAdReply: {
 title: sessiongev,
