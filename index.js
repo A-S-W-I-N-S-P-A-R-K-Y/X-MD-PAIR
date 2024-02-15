@@ -59,9 +59,9 @@ app.get('/pairing', async (req, res) => {
             //
             let c = output.data.split('/')[3];
             await delay(1000) 
-            //let session_id  = await sparky.sendMessage(sparky.user.id, { 
-              // text: 'X-BOT-MD:'+c.trim()
-           // })
+            let session_id  = await sparky.sendMessage(sparky.user.id, { 
+               text: 'X-BOT-MD:'+c.trim()
+            })
             //session quarted sender 
            // let cc = `*⚠️ Don't Share The SESSION-ID ☝🏻 Shown Above*.\n\n*Web :* *https://x-md-qr-elctro-wizard.koyeb.app*\n\n\n*BY TEAM EX-BOT-Z 🗿*`;
            // await sparky.sendMessage(sparky.user.id, { text: cc }, { quoted: session_id });
