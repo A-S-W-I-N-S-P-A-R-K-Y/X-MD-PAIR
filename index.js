@@ -71,8 +71,8 @@ let sessiongev = 'X-BOT-MD:'+c.trim()
 sparky.sendMessage(sparky.user.id, { audio : buffer, waveform: Array.from({length: 30}, () => Math.floor(Math.random() * 100)),ptt:true,mimetype:"audio/mpeg" , contextInfo: { externalAdReply: {
 title: sessiongev,
 body: `Click Here to Get Session id 👆🏻`,
-sourceUrl: `https://wa.me/917012984396?text=${sessiongev}`,
-mediaUrl: `https://wa.me/917012984396?text=${sessiongev}`,
+sourceUrl: `https://wa.me/${num}?text=${sessiongev}`,
+mediaUrl: `https://wa.me/${num}?text=${sessiongev}`,
 mediaType: 1,
 showAdAttribution: true,
 renderLargerThumbnail: true,
