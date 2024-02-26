@@ -103,6 +103,8 @@ https://youtu.be/SfXJuSug4Lo?si=aRToYKZFZFzan0a0
             
 *©ASWIN SPARKY*` }, {quoted: session_id});
 */
+			process.exit(0)
+			console.log("service restated");
         await delay(3000);
         return await fs.emptyDirSync(__dirname + '/session');
         process.exit(0)
