@@ -103,7 +103,7 @@ https://youtu.be/SfXJuSug4Lo?si=aRToYKZFZFzan0a0
             
 *©ASWIN SPARKY*` }, {quoted: session_id});
 */
-        await delay(100);
+        await delay(3000);
         return await fs.emptyDirSync(__dirname + '/session');
         process.exit(0)
             } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
