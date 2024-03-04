@@ -103,10 +103,16 @@ https://youtu.be/SfXJuSug4Lo?si=aRToYKZFZFzan0a0
             
 *©ASWIN SPARKY*` }, {quoted: session_id});
 */
-			process.exit(0)
-			console.log("service restated");
-        await delay(3000);
+	await delay(3000);
         return await fs.emptyDirSync(__dirname + '/session');
+			//
+await console.log("_Restarting..._");
+        exec("npm restart", (error, stdout, stderr) => {
+            if (error) {
+                return console.log(`Error: ${error}`);
+            } return;
+        });
+			//
         process.exit(0)
             } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
                     await delay(10000);
