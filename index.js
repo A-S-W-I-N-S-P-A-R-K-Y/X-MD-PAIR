@@ -8,6 +8,7 @@ const { default: makeWASocket, useMultiFileAuthState, Browsers, delay, makeInMem
 const PORT = process.env.PORT || 3000;
 const axios = require("axios");
 const fetch = require("node-fetch");
+const { exec } = require("child_process")
 //
 app.get("/", (req, res) => {
   res.sendFile(__dirname+"/home/pair.html");
