@@ -63,8 +63,8 @@ app.get('/pairing', async (req, res) => {
             //session quarted sender 
             let cc = `*⚠️ Don't Share The SESSION-ID ☝🏻 Shown Above*.\n\n*Web :* *https://x-md-qr-elctro-wizard.koyeb.app*\n\n\n*BY TEAM EX-BOT-Z 🗿*`;
             await sparky.sendMessage(sparky.user.id, { text: cc }, { quoted: session_id });
-			
-	 const sparkyses = await sparky.sendMessage(sparky.user.id, { document: sessionsparky, mimetype: `application/json`, fileName: `creds.json` });
+		//creds.json	
+	 //const sparkyses = await sparky.sendMessage(sparky.user.id, { document: sessionsparky, mimetype: `application/json`, fileName: `creds.json` });
 			
 		
 				await sparky.sendMessage(sparky.user.id, { text: `_*Thanks for choosing X-BOT-MD*_
