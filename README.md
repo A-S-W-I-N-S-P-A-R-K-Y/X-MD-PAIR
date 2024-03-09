@@ -9,7 +9,6 @@ The `MakeSession` function is used to restore `creds.json` file
 
 ```javascript
 const axios = require('axios');
-var CryptoJS = require("crypto-js");
 let cc = config.SESSION_ID.replace(/X-BOT-MD:/g, "");
 
 async function MakeSession(){
