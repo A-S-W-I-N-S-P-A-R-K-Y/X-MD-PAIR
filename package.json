@@ -1,13 +1,13 @@
 {
-  "name": "aztec-wabot",
-  "version": "3.0.0",
-  "description": "Web qr for every bot",
+  "name": "aswin Sparky qr",
+  "version": "2.0.0",
+  "description": "Web pair for every bot",
   "main": "core.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node core.js"
   },
-  "author": "Diegoson",
+  "author": "aswin Sparky",
   "dependencies": {
     "@whiskeysockets/baileys": "npm:@whiskeysockets/baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
@@ -25,10 +25,6 @@
     "express": "^4.18.2",
     "axios": "^1.6.2",
     "node-fetch": "^2.6.9"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.dev/DiegosonTech/Aztec-Qr.git"
   },
   "engines": {
     "node": "21.5.0"  
