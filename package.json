@@ -12,7 +12,6 @@
     "@whiskeysockets/baileys": "npm:@whiskeysockets/baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "qrcode-terminal": "latest",
-    "cluster": "latest",
     "crypto": "latest",
     "child_process": "^1.0.2",
     "readline": "latest",
