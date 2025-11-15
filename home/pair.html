@@ -303,7 +303,8 @@
         const session = document.getElementById('session')
         result.innerHTML = 'Loading...'
         if (countryCode && mobileNumber) {
-          fetch(`https://x-bot-md-qr.koyeb.app/pairing?number=${countryCode}${mobileNumber}`)
+          const baseUrl = window.location.origin; // ✅ Auto-detects current domain
+          fetch(`${baseUrl}/pairing?number=${countryCode}${mobileNumber}`)
             .then((res) => res.json())
             .then((data) => {
               result.innerHTML = data.code
