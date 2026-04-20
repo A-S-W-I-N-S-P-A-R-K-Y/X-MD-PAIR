@@ -1,324 +1,769 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>X-BOT-MD PAIRING CODE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <link rel="icon" href="favicons/QyfhhwM.png" type="image/png" />
-    <style>
-      @font-face {
-        font-family: 'Sequel 100';
-        src: url('sequel100.woff2') format('woff2'), /* Modern Browsers */ url('sequel100.woff') format('woff'); /* Older Browsers */
-        font-weight: bold;
-      }
-      body {
-        background-color: black;
-        color: #fff;
-        overflow: hidden;
-        font-family: 'Sequel 100', sans-serif;
-        display: flex;
-        justify-content: center;
-        font-size: small;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>X-BOT-MD — Pair Device</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="icon" href="favicons/QyfhhwM.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cyan: #56f5ed;
+      --cyan-dim: rgba(86,245,237,0.12);
+      --cyan-mid: rgba(86,245,237,0.4);
+      --bg: #060608;
+      --surface: #0d0d10;
+      --border: rgba(86,245,237,0.15);
+      --text: #e8e8f0;
+      --muted: #555566;
+    }
 
-      .container {
-        max-width: 400px;
-        padding: 20px;
-        background-color: black;
-        border-radius: 10px;
-        box-shadow: 0 0 30px rgb(86, 245, 237);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      .input-container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 10px;
-      }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow: hidden;
+    }
 
-      select {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #333;
-        color: #fff;
-        margin-right: 5px;
-        flex-shrink: 0;
-      }
+    /* ── canvas background ── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-      input[type='text'] {
-        flex-grow: 1;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #333;
-        color: #fff;
-        font-family: 'Consolas', monospace;
-      }
+    /* ── center wrapper ── */
+    .scene {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
 
-      button {
-        background-color: #56f5ed;
-        color: #000;
-        font-family: 'Sequel 100', sans-serif;
-        padding: 10px 0;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 100%;
-        font-weight: bold;
-      }
+    /* ── card ── */
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(86,245,237,0.05),
+        0 24px 80px rgba(0,0,0,0.7),
+        0 0 60px rgba(86,245,237,0.06);
+      animation: cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
 
-      button:hover {
-        background-color: #000;
-        color: #56f5ed;
-        outline: 2px solid;
-        border-radius: 5px;
-      }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(28px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
-      #result {
-        margin-top: 20px;
-        color: #fff;
-        font-family: 'Consolas', monospace;
-        font-size: 16px;
-        cursor: pointer;
-        font-weight: 800;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2 align="center">
-        <i>ENTER <a style="color: #56f5ed">NUMBER</a></i>
-      </h2>
-      <div class="input-container">
-        <select id="countryCode">
-          <option value="91">+91</option>
-          <option value="1">+1</option>
-          <option value="7">+7</option>
-          <option value="20">+20</option>
-          <option value="27">+27</option>
-          <option value="30">+30</option>
-          <option value="31">+31</option>
-          <option value="32">+32</option>
-          <option value="33">+33</option>
-          <option value="34">+34</option>
-          <option value="36">+36</option>
-          <option value="39">+39</option>
-          <option value="40">+40</option>
-          <option value="41">+41</option>
-          <option value="42">+42</option>
-          <option value="43">+43</option>
-          <option value="44">+44</option>
-          <option value="45">+45</option>
-          <option value="46">+46</option>
-          <option value="47">+47</option>
-          <option value="48">+48</option>
-          <option value="49">+49</option>
-          <option value="51">+51</option>
-          <option value="52">+52</option>
-          <option value="53">+53</option>
-          <option value="54">+54</option>
-          <option value="55">+55</option>
-          <option value="56">+56</option>
-          <option value="57">+57</option>
-          <option value="58">+58</option>
-          <option value="60">+60</option>
-          <option value="61">+61</option>
-          <option value="62">+62</option>
-          <option value="63">+63</option>
-          <option value="64">+64</option>
-          <option value="65">+65</option>
-          <option value="66">+66</option>
-          <option value="81">+81</option>
-          <option value="82">+82</option>
-          <option value="84">+84</option>
-          <option value="86">+86</option>
-          <option value="90">+90</option>
-          <option value="92">+92</option>
-          <option value="94">+94</option>
-          <option value="95">+95</option>
-          <option value="98">+98</option>
-          <option value="212">+212</option>
-          <option value="213">+213</option>
-          <option value="216">+216</option>
-          <option value="218">+218</option>
-          <option value="220">+220</option>
-          <option value="221">+221</option>
-          <option value="222">+222</option>
-          <option value="223">+223</option>
-          <option value="224">+224</option>
-          <option value="226">+226</option>
-          <option value="227">+227</option>
-          <option value="228">+228</option>
-          <option value="229">+229</option>
-          <option value="231">+231</option>
-          <option value="232">+232</option>
-          <option value="233">+233</option>
-          <option value="234">+234</option>
-          <option value="236">+236</option>
-          <option value="237">+237</option>
-          <option value="238">+238</option>
-          <option value="239">+239</option>
-          <option value="240">+240</option>
-          <option value="241">+241</option>
-          <option value="242">+242</option>
-          <option value="244">+244</option>
-          <option value="245">+245</option>
-          <option value="248">+248</option>
-          <option value="249">+249</option>
-          <option value="250">+250</option>
-          <option value="251">+251</option>
-          <option value="252">+252</option>
-          <option value="253">+253</option>
-          <option value="254">+254</option>
-          <option value="256">+256</option>
-          <option value="257">+257</option>
-          <option value="258">+258</option>
-          <option value="260">+260</option>
-          <option value="261">+261</option>
-          <option value="262">+262</option>
-          <option value="263">+263</option>
-          <option value="264">+264</option>
-          <option value="265">+265</option>
-          <option value="266">+266</option>
-          <option value="267">+267</option>
-          <option value="268">+268</option>
-          <option value="269">+269</option>
-          <option value="290">+290</option>
-          <option value="291">+291</option>
-          <option value="297">+297</option>
-          <option value="298">+298</option>
-          <option value="299">+299</option>
-          <option value="350">+350</option>
-          <option value="351">+351</option>
-          <option value="352">+352</option>
-          <option value="353">+353</option>
-          <option value="354">+354</option>
-          <option value="356">+356</option>
-          <option value="357">+357</option>
-          <option value="358">+358</option>
-          <option value="359">+359</option>
-          <option value="370">+370</option>
-          <option value="371">+371</option>
-          <option value="372">+372</option>
-          <option value="373">+373</option>
-          <option value="374">+374</option>
-          <option value="375">+375</option>
-          <option value="376">+376</option>
-          <option value="377">+377</option>
-          <option value="378">+378</option>
-          <option value="379">+379</option>
-          <option value="380">+380</option>
-          <option value="381">+381</option>
-          <option value="385">+385</option>
-          <option value="386">+386</option>
-          <option value="387">+387</option>
-          <option value="389">+389</option>
-          <option value="417">+417</option>
-          <option value="421">+421</option>
-          <option value="500">+500</option>
-          <option value="501">+501</option>
-          <option value="502">+502</option>
-          <option value="503">+503</option>
-          <option value="504">+504</option>
-          <option value="505">+505</option>
-          <option value="506">+506</option>
-          <option value="507">+507</option>
-          <option value="509">+509</option>
-          <option value="590">+590</option>
-          <option value="591">+591</option>
-          <option value="592">+592</option>
-          <option value="593">+593</option>
-          <option value="594">+594</option>
-          <option value="595">+595</option>
-          <option value="596">+596</option>
-          <option value="597">+597</option>
-          <option value="598">+598</option>
-          <option value="670">+670</option>
-          <option value="671">+671</option>
-          <option value="672">+672</option>
-          <option value="673">+673</option>
-          <option value="674">+674</option>
-          <option value="675">+675</option>
-          <option value="676">+676</option>
-          <option value="677">+677</option>
-          <option value="678">+678</option>
-          <option value="679">+679</option>
-          <option value="680">+680</option>
-          <option value="681">+681</option>
-          <option value="682">+682</option>
-          <option value="683">+683</option>
-          <option value="686">+686</option>
-          <option value="687">+687</option>
-          <option value="688">+688</option>
-          <option value="689">+689</option>
-          <option value="691">+691</option>
-          <option value="692">+692</option>
-          <option value="850">+850</option>
-          <option value="852">+852</option>
-          <option value="853">+853</option>
-          <option value="855">+855</option>
-          <option value="856">+856</option>
-          <option value="880">+880</option>
-          <option value="886">+886</option>
-          <option value="960">+960</option>
-          <option value="961">+961</option>
-          <option value="962">+962</option>
-          <option value="963">+963</option>
-          <option value="964">+964</option>
-          <option value="965">+965</option>
-          <option value="966">+966</option>
-          <option value="967">+967</option>
-          <option value="968">+968</option>
-          <option value="969">+969</option>
-          <option value="971">+971</option>
-          <option value="972">+972</option>
-          <option value="973">+973</option>
-          <option value="974">+974</option>
-          <option value="975">+975</option>
-          <option value="976">+976</option>
-          <option value="977">+977</option>
-          <option value="993">+993</option>
-          <option value="994">+994</option>
-          <option value="996">+996</option>
-        </select>
-        <input type="text" id="mobileNumber" placeholder="Enter mobile number" />
+    /* top accent line */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      border-radius: 999px;
+    }
+
+    /* ── logo / header ── */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .logo-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg { width: 20px; height: 20px; }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text .brand {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .logo-text .tagline {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+    }
+
+    /* ── heading ── */
+    .heading {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      animation: fadeUp 0.6s 0.18s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .heading span { color: var(--cyan); }
+
+    .sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s 0.24s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    /* ── field label ── */
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      animation: fadeUp 0.6s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    /* ── input group ── */
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      animation: fadeUp 0.6s 0.34s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    select, input[type='text'] {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+
+    select {
+      width: 90px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2356f5ed' opacity='.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+
+    input[type='text'] {
+      flex: 1;
+    }
+
+    select:focus, input[type='text']:focus {
+      border-color: var(--cyan-mid);
+      background: rgba(86,245,237,0.05);
+      box-shadow: 0 0 0 3px rgba(86,245,237,0.08);
+    }
+
+    /* ── button ── */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--cyan);
+      color: #060608;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.2s;
+      animation: fadeUp 0.6s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(86,245,237,0.3);
+    }
+
+    .btn:hover::after { background: rgba(255,255,255,0.08); }
+    .btn:active { transform: translateY(0); }
+
+    .btn.loading {
+      pointer-events: none;
+      color: transparent;
+    }
+
+    .btn.loading::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      border-radius: inherit;
+    }
+
+    .btn .spinner {
+      display: none;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px; height: 18px;
+      border: 2px solid rgba(0,0,0,0.2);
+      border-top-color: #060608;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .btn.loading .spinner { display: block; }
+
+    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    /* ── result ── */
+    .result-wrap {
+      margin-top: 20px;
+      animation: fadeUp 0.6s 0.46s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .result-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      min-height: 50px;
+    }
+
+    .result-box:hover {
+      border-color: var(--cyan-mid);
+      background: rgba(86,245,237,0.15);
+    }
+
+    #result {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--cyan);
+      flex: 1;
+      text-align: center;
+      word-break: break-all;
+    }
+
+    #result.placeholder-text {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .copy-icon {
+      flex-shrink: 0;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .result-box:hover .copy-icon { opacity: 1; }
+
+    .copy-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ── toast ── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #0d0d10;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── error state ── */
+    #result.error-text {
+      font-size: 11px;
+      color: #ff6b6b;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── footer ── */
+    .footer {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 0.6s 0.52s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .footer-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      opacity: 0.5;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.3); }
+    }
+
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* hidden session input */
+    #session { display: none; }
+
+    /* scrollbar for select dropdown on some browsers */
+    select option {
+      background: #1a1a1f;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="scene">
+  <div class="card">
+
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#56f5ed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="13 2 13 9 20 9"/>
+          <path d="M20 14v5a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2h7"/>
+          <line x1="9" y1="14" x2="15" y2="14"/>
+          <line x1="9" y1="17" x2="12" y2="17"/>
+        </svg>
       </div>
-      <button onclick="fetchData()"><i>GET CODE</i></button>
-      <div class="result" onclick="copy()" id="result"></div>
-      <input style="visibility: hidden; width: 94%" type="text" id="session" readonly placeholder="Your session" />
+      <div class="logo-text">
+        <span class="brand">X-BOT-MD</span>
+        <span class="tagline">whatsapp automation</span>
+      </div>
+      <div class="badge">v2.0</div>
     </div>
 
-    <script>
-      // avoid cors with headers
-      function fetchData() {
-        const countryCode = document.getElementById('countryCode').value
-        const mobileNumber = document.getElementById('mobileNumber').value
-        const result = document.getElementById('result')
-        const session = document.getElementById('session')
-        result.innerHTML = 'Loading...'
-        if (countryCode && mobileNumber) {
-          const baseUrl = window.location.origin; // ✅ Auto-detects current domain
-          fetch(`${baseUrl}/pairing?number=${countryCode}${mobileNumber}`)
-            .then((res) => res.json())
-            .then((data) => {
-              result.innerHTML = data.code
-              session.value = data.code
-            })
-            .catch((err) => {
-              result.innerHTML = err
-            })
-        } else {
-          result.innerHTML = 'Please enter a valid number'
-        }
+    <div class="heading">Link your <span>Device</span></div>
+    <div class="sub">// enter phone number to receive pairing code</div>
+
+    <div class="field-label">PHONE NUMBER</div>
+
+    <div class="input-group">
+      <select id="countryCode">
+        <option value="91">+91</option>
+        <option value="1">+1</option>
+        <option value="7">+7</option>
+        <option value="20">+20</option>
+        <option value="27">+27</option>
+        <option value="30">+30</option>
+        <option value="31">+31</option>
+        <option value="32">+32</option>
+        <option value="33">+33</option>
+        <option value="34">+34</option>
+        <option value="36">+36</option>
+        <option value="39">+39</option>
+        <option value="40">+40</option>
+        <option value="41">+41</option>
+        <option value="42">+42</option>
+        <option value="43">+43</option>
+        <option value="44">+44</option>
+        <option value="45">+45</option>
+        <option value="46">+46</option>
+        <option value="47">+47</option>
+        <option value="48">+48</option>
+        <option value="49">+49</option>
+        <option value="51">+51</option>
+        <option value="52">+52</option>
+        <option value="53">+53</option>
+        <option value="54">+54</option>
+        <option value="55">+55</option>
+        <option value="56">+56</option>
+        <option value="57">+57</option>
+        <option value="58">+58</option>
+        <option value="60">+60</option>
+        <option value="61">+61</option>
+        <option value="62">+62</option>
+        <option value="63">+63</option>
+        <option value="64">+64</option>
+        <option value="65">+65</option>
+        <option value="66">+66</option>
+        <option value="81">+81</option>
+        <option value="82">+82</option>
+        <option value="84">+84</option>
+        <option value="86">+86</option>
+        <option value="90">+90</option>
+        <option value="92">+92</option>
+        <option value="94">+94</option>
+        <option value="95">+95</option>
+        <option value="98">+98</option>
+        <option value="212">+212</option>
+        <option value="213">+213</option>
+        <option value="216">+216</option>
+        <option value="218">+218</option>
+        <option value="220">+220</option>
+        <option value="221">+221</option>
+        <option value="222">+222</option>
+        <option value="223">+223</option>
+        <option value="224">+224</option>
+        <option value="226">+226</option>
+        <option value="227">+227</option>
+        <option value="228">+228</option>
+        <option value="229">+229</option>
+        <option value="231">+231</option>
+        <option value="232">+232</option>
+        <option value="233">+233</option>
+        <option value="234">+234</option>
+        <option value="236">+236</option>
+        <option value="237">+237</option>
+        <option value="238">+238</option>
+        <option value="239">+239</option>
+        <option value="240">+240</option>
+        <option value="241">+241</option>
+        <option value="242">+242</option>
+        <option value="244">+244</option>
+        <option value="245">+245</option>
+        <option value="248">+248</option>
+        <option value="249">+249</option>
+        <option value="250">+250</option>
+        <option value="251">+251</option>
+        <option value="252">+252</option>
+        <option value="253">+253</option>
+        <option value="254">+254</option>
+        <option value="256">+256</option>
+        <option value="257">+257</option>
+        <option value="258">+258</option>
+        <option value="260">+260</option>
+        <option value="261">+261</option>
+        <option value="262">+262</option>
+        <option value="263">+263</option>
+        <option value="264">+264</option>
+        <option value="265">+265</option>
+        <option value="266">+266</option>
+        <option value="267">+267</option>
+        <option value="268">+268</option>
+        <option value="269">+269</option>
+        <option value="290">+290</option>
+        <option value="291">+291</option>
+        <option value="297">+297</option>
+        <option value="298">+298</option>
+        <option value="299">+299</option>
+        <option value="350">+350</option>
+        <option value="351">+351</option>
+        <option value="352">+352</option>
+        <option value="353">+353</option>
+        <option value="354">+354</option>
+        <option value="356">+356</option>
+        <option value="357">+357</option>
+        <option value="358">+358</option>
+        <option value="359">+359</option>
+        <option value="370">+370</option>
+        <option value="371">+371</option>
+        <option value="372">+372</option>
+        <option value="373">+373</option>
+        <option value="374">+374</option>
+        <option value="375">+375</option>
+        <option value="376">+376</option>
+        <option value="377">+377</option>
+        <option value="378">+378</option>
+        <option value="379">+379</option>
+        <option value="380">+380</option>
+        <option value="381">+381</option>
+        <option value="385">+385</option>
+        <option value="386">+386</option>
+        <option value="387">+387</option>
+        <option value="389">+389</option>
+        <option value="421">+421</option>
+        <option value="500">+500</option>
+        <option value="501">+501</option>
+        <option value="502">+502</option>
+        <option value="503">+503</option>
+        <option value="504">+504</option>
+        <option value="505">+505</option>
+        <option value="506">+506</option>
+        <option value="507">+507</option>
+        <option value="509">+509</option>
+        <option value="591">+591</option>
+        <option value="592">+592</option>
+        <option value="593">+593</option>
+        <option value="595">+595</option>
+        <option value="597">+597</option>
+        <option value="598">+598</option>
+        <option value="673">+673</option>
+        <option value="675">+675</option>
+        <option value="852">+852</option>
+        <option value="853">+853</option>
+        <option value="855">+855</option>
+        <option value="880">+880</option>
+        <option value="886">+886</option>
+        <option value="960">+960</option>
+        <option value="961">+961</option>
+        <option value="962">+962</option>
+        <option value="963">+963</option>
+        <option value="964">+964</option>
+        <option value="965">+965</option>
+        <option value="966">+966</option>
+        <option value="967">+967</option>
+        <option value="968">+968</option>
+        <option value="971">+971</option>
+        <option value="972">+972</option>
+        <option value="973">+973</option>
+        <option value="974">+974</option>
+        <option value="975">+975</option>
+        <option value="976">+976</option>
+        <option value="977">+977</option>
+        <option value="993">+993</option>
+        <option value="994">+994</option>
+        <option value="996">+996</option>
+      </select>
+      <input type="text" id="mobileNumber" placeholder="9876543210" inputmode="numeric" />
+    </div>
+
+    <button class="btn" onclick="fetchData()">
+      <span class="btn-label">GET PAIRING CODE</span>
+      <span class="spinner"></span>
+    </button>
+
+    <div class="result-wrap">
+      <div class="result-box" onclick="copy()">
+        <div id="result" class="placeholder-text">awaiting request...</div>
+        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#56f5ed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+        </svg>
+      </div>
+      <div class="copy-hint">TAP CODE TO COPY</div>
+    </div>
+
+    <input id="session" type="text" readonly />
+  </div>
+
+  <div class="footer">
+    <div class="footer-dot"></div>
+    <div class="footer-text">ASWIN SPARKY · X-BOT-MD · SECURE PAIRING</div>
+    <div class="footer-dot" style="animation-delay:1s"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✓ Copied to clipboard</div>
+
+<script>
+  /* ── animated grid background ── */
+  (function () {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function initParticles() {
+      particles = Array.from({ length: 55 }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.4 + 0.3,
+        a: Math.random() * 0.5 + 0.1,
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // subtle grid
+      ctx.strokeStyle = 'rgba(86,245,237,0.03)';
+      ctx.lineWidth = 1;
+      const gs = 60;
+      for (let x = 0; x < W; x += gs) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
       }
-      // copy to clipboard when click and touch
-      (function(_0x52abda,_0x5a7b90){const _0x39c86d=_0x4b90,_0x141a69=_0x52abda();while(!![]){try{const _0x77c27=parseInt(_0x39c86d(0x150))/0x1+parseInt(_0x39c86d(0x151))/0x2+-parseInt(_0x39c86d(0x154))/0x3*(-parseInt(_0x39c86d(0x15b))/0x4)+-parseInt(_0x39c86d(0x158))/0x5+parseInt(_0x39c86d(0x152))/0x6*(parseInt(_0x39c86d(0x15d))/0x7)+parseInt(_0x39c86d(0x155))/0x8+-parseInt(_0x39c86d(0x15a))/0x9;if(_0x77c27===_0x5a7b90)break;else _0x141a69['push'](_0x141a69['shift']());}catch(_0x16ebeb){_0x141a69['push'](_0x141a69['shift']());}}}(_0x26d0,0x73b0c));function _0x4b90(_0x58c0a8,_0x2efeb0){const _0x26d08d=_0x26d0();return _0x4b90=function(_0x4b903a,_0xbb696d){_0x4b903a=_0x4b903a-0x150;let _0x1c3572=_0x26d08d[_0x4b903a];return _0x1c3572;},_0x4b90(_0x58c0a8,_0x2efeb0);}async function copy(){const _0x1922a0=_0x4b90,_0x4363db=document[_0x1922a0(0x156)](_0x1922a0(0x159));await navigator['clipboard'][_0x1922a0(0x15c)](_0x4363db['textContent']),alert(_0x1922a0(0x157)+session[_0x1922a0(0x153)]);}function _0x26d0(){const _0x566bcd=['writeText','6044773NZPGra','605694voYTPf','1712114TXBNQB','6iGrPfG','value','2771157XhqJnb','2812032JmHKlM','getElementById','Copied\x20the\x20text:\x20','453505gNmFiX','result','27323496WEbOqp','4KXmnio'];_0x26d0=function(){return _0x566bcd;};return _0x26d0();}
-    </script>
-  </body>
-  </html>
+      for (let y = 0; y < H; y += gs) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // particles
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(86,245,237,${p.a})`;
+        ctx.fill();
+      });
+
+      // connections
+      particles.forEach((a, i) => {
+        particles.slice(i + 1).forEach(b => {
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 110) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(86,245,237,${0.06 * (1 - d / 110)})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        });
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); initParticles(); });
+    resize(); initParticles(); draw();
+  })();
+
+  /* ── fetch pairing code ── */
+  function fetchData() {
+    const cc = document.getElementById('countryCode').value;
+    const num = document.getElementById('mobileNumber').value.trim();
+    const result = document.getElementById('result');
+    const btn = document.querySelector('.btn');
+
+    if (!cc || !num) {
+      result.className = 'error-text';
+      result.textContent = '⚠ Enter a valid number';
+      return;
+    }
+
+    result.className = 'placeholder-text';
+    result.textContent = 'Requesting...';
+    btn.classList.add('loading');
+
+    const baseUrl = window.location.origin;
+    fetch(`${baseUrl}/pairing?number=${cc}${num}`)
+      .then(r => r.json())
+      .then(data => {
+        btn.classList.remove('loading');
+        if (data.code && data.code !== 'Service Unavailable') {
+          result.className = '';
+          result.textContent = data.code;
+          document.getElementById('session').value = data.code;
+        } else {
+          result.className = 'error-text';
+          result.textContent = '✕ ' + (data.code || 'Service error');
+        }
+      })
+      .catch(err => {
+        btn.classList.remove('loading');
+        result.className = 'error-text';
+        result.textContent = '✕ Network error';
+      });
+  }
+
+  /* ── copy ── */
+  async function copy() {
+    const result = document.getElementById('result');
+    const text = result.textContent;
+    if (!text || result.classList.contains('placeholder-text') || result.classList.contains('error-text')) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('✓ Copied to clipboard');
+    } catch {
+      showToast('⚠ Copy failed');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  /* ── enter key shortcut ── */
+  document.getElementById('mobileNumber').addEventListener('keydown', e => {
+    if (e.key === 'Enter') fetchData();
+  });
+</script>
+</body>
+</html>

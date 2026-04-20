@@ -9,17 +9,11 @@ The `MakeSession` function is used to restore `creds.json` file
 
 ```javascript
 const axios = require('axios');
-let cc = config.SESSION_ID.split(':')[1];
 
 async function MakeSession(){
 if (!fs.existsSync(__dirname + '/session/creds.json')) {
-    if(cc.length<30){
-        let { data } = await axios.get('https://aswin-sparky-pastebin.onrender.com/raw/'+cc)
-    await fs.writeFileSync(__dirname + '/session/creds.json', atob(data), "utf8")    
-    } else {
-	 var c = atob(cc)
-         await fs.writeFileSync(__dirname + '/session/creds.json', c, "utf8")    
-    }
+        let { data } = await axios.get(`http://localhost:3000/session?id=`+ your_session);
+        await fs.writeFileSync(__dirname + '/session/creds.json', data.data, "utf8");
 }
 }
 MakeSession()
