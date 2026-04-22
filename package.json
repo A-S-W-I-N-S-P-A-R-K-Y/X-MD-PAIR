@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start . --attach --name X-MD-PAIR",
-    "stop": "pm2 stop . --attach --name X-MD-PAIR"
+    "start": "pm2 start index.js --attach --name X-MD-PAIR",
+    "stop": "pm2 stop X-MD-PAIR"
   },
   "author": "aswin Sparky",
   "dependencies": {
