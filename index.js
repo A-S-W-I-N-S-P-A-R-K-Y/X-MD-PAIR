@@ -26,7 +26,7 @@ app.set("json spaces", 4)
 connectDatabase();
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/home/pair.html");
+    res.sendFile(__dirname + "/lib/pair.html");
 });
 
 if (fs.existsSync("./session")) {
@@ -110,11 +110,6 @@ app.get("/pairing", async (req, res) => {
                     await delay(3000);
                     fs.emptyDirSync(__dirname + "/session");
                     console.log("_Restarting..._");
-                    exec("npm restart", (error) => {
-                        if (error) {
-                            console.log(`Error: ${error}`);
-                        }
-                    });
                     process.exit(0);
                 } else if (
                     connection === "close" &&

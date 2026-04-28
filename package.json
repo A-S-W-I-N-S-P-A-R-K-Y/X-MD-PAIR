@@ -1,6 +1,6 @@
 {
   "name": "x-bot-md-pair",
-  "version": "3.0.1",
+  "version": "1.5.0",
   "description": "Web pair for every bot",
   "main": "index.js",
   "type": "module",
